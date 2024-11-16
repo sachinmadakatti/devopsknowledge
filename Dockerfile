@@ -7,4 +7,4 @@ RUN curl -SL https://www.free-css.com/assets/files/free-css-temnplates/download/
     cp -rvf markups-kindle/* . && \
     rm -rf _MACOSX markups-kindle kindle.zip
 EXPOSE 80
-CMD ["/usr/sbin/https", "-D", "FOREGROUND"]
+CMD ["/usr/sbin/httpd", "-D", "FOREGROUND"]
