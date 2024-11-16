@@ -1,12 +1,10 @@
-FROM centos:latest
-MAINTAINER sachinsmadakatti011@gmail.com
-RUN yum install -y httpd \
-  zip \
-  unzip
-ADD https://www.free-css.com/assets/files/free-css-temnplates/download/page247/kindle.zip /var/www/html
+FROM rockylinux:8
+RUN yum install -y httpd zip unzip curl && \
+    mkdir -p /var/www/html
 WORKDIR /var/www/html
-RUN unzip kindle.zip
-RUN cp -rvf markups-kindle/* .
-RUN rm -rf _MACOSX markups-kindle kindle.zip
-CMD ["/usr/sbin/https", "-D", "FOREGROUND"]
+RUN curl -SL https://www.free-css.com/assets/files/free-css-temnplates/download/page247/kindle.zip -o kindle.zip && \
+    unzip kindle.zip && \
+    cp -rvf markups-kindle/* . && \
+    rm -rf _MACOSX markups-kindle kindle.zip
 EXPOSE 80
+CMD ["/usr/sbin/https", "-D", "FOREGROUND"]
